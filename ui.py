@@ -71,6 +71,33 @@ st.set_page_config(
 
 _ensure_session_state()
 
+# ============================================================================
+# SEÇÃO DE INFORMAÇÕES DO TRABALHO
+# ============================================================================
+
+st.title("📅 AcademicFlow-Agent")
+st.markdown("---")
+
+col1, col2 = st.columns([2, 1])
+with col1:
+    st.markdown("""
+    **Disciplina:** Sistemas Colaborativos  
+    **Instituição:** USP (Universidade de São Paulo)
+    """)
+with col2:
+    st.markdown("""
+    **Alunos:**
+    - Pedro Eduardo Moreira Chamone
+    - Pedro Santos Souza
+    """)
+
+st.markdown("---")
+st.markdown("""
+Sistema colaborativo baseado em agentes de IA para auxiliar no planejamento de eventos acadêmicos.
+Utilize o chat abaixo para interagir com o assistente.
+""")
+st.markdown("---")
+
 user_prompt = st.chat_input("Escreva sua mensagem para o agente...")
 
 if user_prompt:
