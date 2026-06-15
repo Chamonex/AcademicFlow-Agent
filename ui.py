@@ -17,6 +17,11 @@ def _render_tools_called():
         for tool_name in st.session_state.tools_called:
             st.badge(f"Ferramenta chamada: {tool_name}", color="orange")
 
+def _render_user_chooser():
+    with st.sidebar:
+        user = st.selectbox("Selecione o usuário", usuarios)
+        st.session_state.current_user = user
+
 def _render_board_summary() -> None:
     with st.sidebar:
         st.markdown("### Quadro do projeto")
@@ -58,6 +63,8 @@ def _ensure_session_state() -> None:
         st.session_state.project_board = _fresh_board()
     if "tools_called" not in st.session_state:
         st.session_state.tools_called = set()
+    if "current_user" not in st.session_state:
+        st.session_state.current_user = usuarios[0]
 
 def _bind_project_board() -> None:
     '''Vincula o dicionário do quadro do projeto na sessão do Streamlit à variável usada pelas ferramentas do agente.'''
@@ -69,6 +76,7 @@ st.set_page_config(
     layout="centered",
 )
 
+usuarios = react_agent.get_users()
 _ensure_session_state()
 
 # ============================================================================
@@ -81,7 +89,7 @@ st.markdown("---")
 col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("""
-    **Disciplina:** Sistemas Colaborativos  
+    **SSC0528 - Sistemas Colaborativos: Fundamentos e Aplicações**
     """)
     st.image("logo.png", width=200)
 with col2:
@@ -102,7 +110,9 @@ user_prompt = st.chat_input("Escreva sua mensagem para o agente...")
 
 if user_prompt:
 
-    st.session_state.messages.append(HumanMessage(content=user_prompt))
+    # Identificar qual usuário enviou a mensagem (preferir seleção em sidebar)
+    sender = st.session_state.get("current_user") or "Usuário Desconecido"
+    st.session_state.messages.append(HumanMessage(content=f"[user:{sender}] {user_prompt}"))
 
     with st.spinner("Processando com o agente..."):
         final_step = None
@@ -135,3 +145,4 @@ if user_prompt:
 _render_board_summary()
 _render_chat_history()
 _render_tools_called()
+_render_user_chooser()

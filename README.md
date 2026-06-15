@@ -186,18 +186,6 @@ A aplicação será aberta automaticamente no navegador em `http://localhost:850
 - Verifique se está na pasta do projeto
 - Execute `streamlit run ui.py` com as dependências instaladas corretamente
 
-```bash
-ollama serve
-```
-
-### 4. Executar o projeto
-
-```bash
-python main.py
-```
-
----
-
 ## Exemplo de Uso
 
 ```text
@@ -227,7 +215,6 @@ Agente: Exibe tarefas, decisões e seções registradas.
 ## Possíveis Melhorias Futuras
 
 - Persistência em banco de dados;
-- Interface web;
 - Múltiplos agentes especializados;
 - Integração com calendário;
 - Sistema de autenticação;
