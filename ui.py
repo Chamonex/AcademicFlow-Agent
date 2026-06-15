@@ -82,8 +82,8 @@ col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("""
     **Disciplina:** Sistemas Colaborativos  
-    **Instituição:** USP (Universidade de São Paulo)
     """)
+    st.image("logo.png", width=200)
 with col2:
     st.markdown("""
     **Alunos:**
